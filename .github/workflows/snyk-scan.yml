@@ -1,11 +1,21 @@
-name: Example workflow for Node using Snyk
+name: Snyk Security Scan for DVNA
+
 on: push
+
 jobs:
-  security:
+  snyk_security_scan:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@master
+      - name: Checkout DVNA code
+        uses: actions/checkout@v3
+        with:
+          repository: Beejiguy/dvna  # Specify the target repo
+          ref: main               # Or the branch you want to scan
+
       - name: Run Snyk to check for vulnerabilities
-        uses: snyk/actions/node@master
+        uses: snyk/actions/golang@master 
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+        with:
+          command:   
+ test   # Or 'monitor' for ongoing monitoring
