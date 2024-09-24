@@ -11,6 +11,9 @@ jobs:
         with:
           repository: Beejiguy/dvna  # Specify the target repo
           ref: master               # Or the branch you want to scan
+      - name: update bcrypt
+        run: npm install bcrypt@latest
+        
       - name: install dependencies 
         run: npm install
 
