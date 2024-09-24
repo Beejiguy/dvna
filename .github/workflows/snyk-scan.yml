@@ -1,4 +1,5 @@
 name: Snyk Security Scan for DVNA
+on: push
 
 jobs:
   snyk_security_scan:
