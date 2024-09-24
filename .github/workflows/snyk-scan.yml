@@ -1,0 +1,21 @@
+name: Snyk Security Scan for DVNA
+
+on:
+  schedule:
+    - cron: '0 8 * * *'  # Run daily at 8 AM (adjust as needed)
+  workflow_dispatch:   # Allow manual triggering
+
+jobs:
+  snyk_security_scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout DVNA code
+        uses: actions/checkout@v3
+        with:
+          repository: dvna/dvna  # Specify the target repo
+          ref: main               # Or the branch you want to scan
+
+      - name: Run Snyk to check for vulnerabilities
+        uses: snyk/actions/golang@master 
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
